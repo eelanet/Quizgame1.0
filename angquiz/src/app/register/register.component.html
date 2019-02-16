@@ -16,11 +16,6 @@
               <input placeholder="Anna nimesi" type="text" name="name" [(ngModel)]="name" ngModel required>
               <label for="name"></label>
             </div>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">mail_outline</i>
-              <input placeholder="Anna sähköpostisi" type="text" name="email" [(ngModel)]="email" ngModel required [pattern]="emailPattern">
-              <label for="email"></label>
-            </div>
             <div class="row">
               <div class="input-field col s12">
                 <button class="btn-large btn-submit yellow darken-4" type="submit" [disabled]="!registerForm.valid">Aloita</button>

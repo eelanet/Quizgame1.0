@@ -10,12 +10,7 @@ import { Player } from "../player";
 })
 export class RegisterComponent implements OnInit {
 
-  // Sähköpostin validointi
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-
   name = '';
-  email = '';
-
   registered: boolean = false;
   playerName: string = '';
   
@@ -46,7 +41,7 @@ export class RegisterComponent implements OnInit {
 
   // Lähetetään data local storageen talteen
   onSubmit(formData) {
-    let player = new Player(formData.name, formData.email);
+    let player = new Player(formData.name);
     localStorage.clear();
     localStorage.setItem('player', JSON.stringify(player));
     this.router.navigate(['/lobby']);
