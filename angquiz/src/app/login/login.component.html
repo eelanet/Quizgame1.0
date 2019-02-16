@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col s12 m6 offset-m3">
+    <div class="card">
+      <div class="col s6">
+        <h1>Kirjaudu</h1>
+        <p><strong>ADMIN</strong></p>
+      </div>
+      <div class="col s6">
+        <img src="/assets/images/quiz.png" style="width: 70%;" class="offset-s3 right" alt="quiz">
+      </div>
+      <div class="card-content">
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
+          <div class="row">
+            <div class="input-field col s12 m8">
+              <i class="material-icons prefix">account_circle</i>
+              <input placeholder="Anna käyttäjänimi" type="text" name="username" ngModel required />
+              <label for="username"></label>
+            </div>
+            <div class="input-field col s12 m8">
+              <i class="material-icons prefix">https</i>
+              <input placeholder="Anna salasana" type="password" name="password" ngModel required />
+              <label for="password"></label>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 m8">
+                <button class="btn-large btn-submit yellow darken-4" type="submit" [disabled]="!loginForm.valid">Kirjaudu</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 m8 center">
+                <p>TAI</p>
+                <br>
+              </div>
+              <div *ngIf="!registered" class="col s12 m8 center">
+                <button class="btn-small yellow darken-4" type="button" (click)="onRegister()">Rekisteröidy</button>
+              </div>
+              <div *ngIf="registered" class="col s12 m8 center">
+                <button class="btn-small yellow darken-4" type="button" (click)="onRegister()">Pelaamaan!</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

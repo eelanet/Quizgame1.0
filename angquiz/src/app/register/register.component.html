@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col s12 m6 offset-m3">
+    <div class="card">
+      <div class="col s12">
+        <img src="/assets/images/quiz.png" style="width: 70%;" class="offset-s3" alt="quiz">
+      </div>
+      <div class="col s12">
+        <h2 *ngIf="!registered">Rekisteröidy</h2>
+        <h2 *ngIf="registered">Hei <strong>{{ playerName }}</strong></h2>
+      </div>
+      <div class="card-content">
+        <form *ngIf="!registered" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm.value)">
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">account_circle</i>
+              <input placeholder="Anna nimesi" type="text" name="name" [(ngModel)]="name" ngModel required>
+              <label for="name"></label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">mail_outline</i>
+              <input placeholder="Anna sähköpostisi" type="text" name="email" [(ngModel)]="email" ngModel required [pattern]="emailPattern">
+              <label for="email"></label>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <button class="btn-large btn-submit yellow darken-4" type="submit" [disabled]="!registerForm.valid">Aloita</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <button *ngIf="registered" class="btn-large yellow darken-4" (click)="onStart()">Pelaamaan!</button>
+        <div *ngIf="!registered" class="row">
+          <div class="col s12 center">
+            <p>TAI</p>
+            <br>
+          </div>
+          <div class="col s12 center">
+            <button class="btn-small yellow darken-4" type="button" routerLink="/login">Kirjaudu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

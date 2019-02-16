@@ -1,0 +1,13 @@
+<nav id="navbar" class="yellow darken-4">
+  <div class="nav-wrapper">
+    <div class="hide-on-med-and-down">
+      <a routerLink="/register" class="brand-logo center">QuizGame</a>
+    </div>
+    <ul id="nav-mobile" class="right">
+      <li class="nav-item"><a class="nav-link" routerLink="/lobby">Pelaamaan!</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/category">Kategoriat</a></li>
+      <li *ngIf="!login" class="nav-item"><a class="nav-link" routerLink="/login">Kirjaudu</a></li>
+      <li *ngIf="login" class="nav-item"><a class="nav-link" routerLink="/login" (click)="doLogout()">Kirjaudu ulos</a></li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col s10 offset-s1">
+    <h2 class="header">{{ result }}</h2>
+    <div class="card horizontal col s12">
+      <div class="card-image hide-on-med-and-down">
+        <img src="../../assets/images/trophy.png">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+          <h4 *ngIf="playerName != null" class="player-name">{{ playerName }}</h4>
+          <h3>{{ quizService.correctAnswerCount }} / {{ quizService.selectedCategory.catquestions.length }}</h3>
+          <span>Aika {{ quizService.displayTimeElapsed() }}</span>
+        </div>
+        <div class="card-action">
+          <button class="btn yellow darken-4" (click)="onLobby()">Aulaan</button>
+        </div>
+      </div>
+      <br>
+      <a class="btn-floating halfway-fab waves-effect waves-light blue-grey darken-1" (click)="restart()">
+        <i class="material-icons">replay</i>
+      </a>
+    </div>
+
+    <h3>Tulokset</h3>
+    <ng-container *ngFor="let q of quizService.questions; let i=index">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">{{ i+1 }}</span>
+          <p>{{ q.question }}</p>
+          <div *ngIf="q.imageName!=null">
+            <img [src]="quizService.rootUrl+'/images/'+q.imageName" class="center">
+          </div>
+        </div>
+        <div class="card-action">
+          <ul class="collection">
+            <ng-container *ngFor="let option of q.options; let j = index">
+              <li class="collection-item" *ngIf="option != null">
+                <span>{{ option }}</span>
+                <span class="badge" *ngIf="q.correct == j">
+                  <i class="material-icons green-text">check_circle</i>
+                </span>
+                <span class="badge" *ngIf="q.answer == j && q.correct != j">
+                  <i class="material-icons red-text">not_interested</i>
+                </span>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="center">
+    <h2>Valitse Kategoria</h2>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col s6 m4 l3" *ngFor="let c of categories">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="/assets/images/quiz.png" style="width: 90%">
+        </div>
+        <div class="card-content activator">
+          <div class="card-title grey-text text-darken-4 activator">{{ c.catname }}</div>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">
+            <i class="material-icons right">close</i>
+            {{ c.catname }}
+            <div class="buttons">
+              <span>
+                <a class="waves-effect yellow darken-4 btn" (click)="onCatChoice(c)">Aloita Peli</a>
+              </span>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

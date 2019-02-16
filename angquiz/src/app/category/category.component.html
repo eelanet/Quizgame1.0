@@ -1,0 +1,123 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div *ngIf="login" class="center">
+    <h2>Muokkaa Kategorioita</h2>
+  </div>
+  <div *ngIf="!login" class="center">
+    <h2>Selaa Kategorioita</h2>
+  </div>
+  <div *ngIf="login" class="row">
+    <div class="col s12 m6">
+      <div class="card horizontal">
+        <div class="card-stacked">
+          <div class="card-content">
+            <h4 *ngIf="addCategory" class="header">Lisää Kategoria</h4>
+            <h4 *ngIf="editCategory" class="header">Muokkaa Kategorian Nimeä</h4>
+            <div class="container-fluid">
+              <form #f="ngForm" (ngSubmit)="onSubmitCategory(f.value)">
+                <div class="form-group">
+                  <span class="col m6">
+                    <label for="categoryname"></label>
+                    <input placeholder="Kategorian nimi..." type="text" class="form-control" name="catname" [(ngModel)]="catname"
+                      ngModel required />
+                  </span>
+                </div>
+                <button *ngIf="addCategory" type="submit" class="btn col m3 right yellow darken-4" [disabled]="!f.valid">Lisää</button>
+                <button *ngIf="editCategory" type="submit" class="btn col m3 right yellow darken-4" [disabled]="!f.valid">Muokkaa</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m6">
+      <div class="card horizontal">
+        <div class="card-stacked">
+          <div class="card-content">
+            <h4 class="header">Hae Kategoria</h4>
+            <div class="container-fluid">
+              <div class="container-fluid">
+                <div class="form-group col m6">
+                  <input class="form-control" #haeForm="ngForm" type="text" placeholder="Hae kirjaimilla" [formControl]="nameFilter">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="container">
+  <div class="row">
+    <div class="col s12 m6" *ngFor="let c of categories | searchfilter:field:filterCriteria">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="/assets/images/quiz.png" style="width: 90%;">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">{{ c.catname }}<i class="material-icons right">more_vert</i></span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">
+            {{ c.catname }}<i class="material-icons right">close</i>
+            <div *ngIf="login" class="buttons">
+              <div>
+                <a class="col s10 waves-effect brown btn" (click)="onEditName(c)"><i class="material-icons left">edit</i>Muokkaa
+                  Nimeä</a>
+              </div>
+              <div class="space col s12"></div>
+              <div>
+                <a class="col s10 waves-effect red lighten-1 btn" (click)="onDeleteCategory(c)"><i class="material-icons left">delete</i>Poista
+                  Kategoria</a>
+              </div>
+            </div>
+          </span>
+          <ng-container *ngFor="let q of c.catquestions">
+            <ul class="col s12 collection">
+              <li class="col s12 collection-item">
+                {{ q.question }} <a *ngIf="login" class="right waves-effect red lighten-1 btn-small" (click)="onDeleteQuestion(c, q)">Poista</a>
+              </li>
+            </ul>
+          </ng-container>
+          <div *ngIf="login" class="container-fluid col s12">
+            <div class="d-flex mt-3 mb-3"></div>
+            <form #f="ngForm" (ngSubmit)="onSubmitQuestion(c, f.value)">
+              <div class="form-group">
+                <i class="material-icons prefix">mode_edit</i>
+                <!-- Kysymys -->
+                <label for="question"></label>
+                <input placeholder="Kysymys..." type="text" class="form-control" name="question" [(ngModel)]="question"
+                  ngModel required />
+                <!-- Vaihtoehto 1 -->
+                <span>1.</span><label for="option1"></label>
+                <input placeholder="Vaihtoehto 1..." type="text" class="form-control" name="option1" [(ngModel)]="option1"
+                  ngModel required />
+                <!-- Vaihtoehto 2 -->
+                <span>2.</span><label for="option2"></label>
+                <input placeholder="Vaihtoehto 2..." type="text" class="form-control" name="option2" [(ngModel)]="option2"
+                  ngModel required />
+                <!-- Vaihtoehto 3 -->
+                <span>3.</span><label for="option3"></label>
+                <input placeholder="Vaihtoehto 3..." type="text" class="form-control" name="option3" [(ngModel)]="option3"
+                  ngModel />
+                <!-- Vaihtoehto 4 -->
+                <span>4.</span><label for="option4"></label>
+                <input placeholder="Vaihtoehto 4..." type="text" class="form-control" name="option4" [(ngModel)]="option4"
+                  ngModel />
+                <label for="question"></label>
+                <input placeholder="Oikea vastaus (numero)" type="number" class="form-control" name="answer"
+                  [(ngModel)]="answer" ngModel required min="1" max="4" />
+              </div>
+              <button type="submit" class="btn yellow darken-4" [disabled]="!f.valid">Lisää Uusi</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
