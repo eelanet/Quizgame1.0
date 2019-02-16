@@ -19,20 +19,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 
-
 app.use(express.static(path.join(__dirname + '/public')));
-
 app.use('/lobby', express.static(path.join(__dirname, '/public')));
 app.use('/category', express.static(path.join(__dirname, '/public')));
 app.use('/register', express.static(path.join(__dirname, '/public')));
 app.use('/login', express.static(path.join(__dirname, '/public')));
 app.use('/quiz', express.static(path.join(__dirname, '/public')));
 app.use('/result', express.static(path.join(__dirname, '/public')));
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname + '/public'));
-// });
-
 
 // Routes
 app.use(questionsRouter);
